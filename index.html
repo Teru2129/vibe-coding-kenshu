@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>バイブコーディング研修 練習サイト｜作って、貯めて、分析する</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header>
+  <h1>バイブコーディング研修 練習サイト</h1>
+  <span class="sub">作って、貯めて、分析する｜弟子屈町の口コミで体験</span>
+</header>
+<nav id="tabs">
+  <button data-t="make" class="on">① つくる</button>
+  <button data-t="store">② 貯める</button>
+  <button data-t="analyze">③ 分析する</button>
+  <button data-t="take">④ 持ち帰る</button>
+  <button data-t="rules">ルールとキー</button>
+</nav>
+<main>
+
+<!-- ① つくる -->
+<section id="make" class="on">
+  <h2>① つくる：弟子屈町の観光LP</h2>
+  <p class="lead"><span class="tag way">つながり方：チャット</span> ふだん使っているAI（ChatGPT・Gemini・Claudeなど、無料でOK）に頼んで作ります。</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>頼み方の型（コピーして、AIに貼り付け）</h3>
+      <pre class="prompt" id="p1">弟子屈町の観光LPを、1つのHTMLファイルで作ってください。
+目的：旅行者に弟子屈の魅力を伝え、口コミを集める
+使う人：スマホで旅先を調べている人
+見せたい場所：摩周湖・屈斜路湖・川湯温泉・硫黄山
+入れたい機能：
+・今日の弟子屈の天気（Open-Meteo の無料APIを使う。キー不要）
+・口コミ投稿欄（名前・場所・季節・★1〜5・本文）
+雰囲気：自然の青と緑。スマホで見やすく</pre>
+      <button class="btn" data-copy="p1">プロンプトをコピー</button>
+      <p class="note">型：目的 → 使う人 → 機能 → 見た目。うまくいかないときは、どこが違うかを1つずつ伝えます。</p>
+    </div>
+    <div class="card">
+      <h3>見本のLP</h3>
+      <p>天気はキー不要のAPIから、口コミはこのサイトの共有データベースに保存されます。</p>
+      <a class="btn" href="lp.html" target="_blank">見本のLPを開く</a>
+      <h3 style="margin-top:18px">早く終わった人へ</h3>
+      <pre class="prompt" id="p2">次の点を直してください。
+・摩周湖の写真の代わりに、色のグラデーションで湖を表現して
+・口コミ投稿欄に「どの季節に行きましたか」を追加して
+・ページの一番下に「出典：Open-Meteo」と表示して</pre>
+      <button class="btn ghost" data-copy="p2">追加の頼み方をコピー</button>
+    </div>
+  </div>
+</section>
+
+<!-- ② 貯める -->
+<section id="store">
+  <h2>② 貯める：AIが整理しながら貯める</h2>
+  <p class="lead"><span class="tag way">つながり方：API</span> 投稿した瞬間、アプリが裏でAIを呼び出し「良い／悪い」「景色・食事・交通…」を判定して一緒に保存します。</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>口コミを投稿する</h3>
+      <div class="warn">本物の個人情報は書かないでください。名前はニックネームで。</div>
+      <label>ニックネーム（20文字まで）</label><input id="f_author" maxlength="20" placeholder="例：ふじ">
+      <div class="row">
+        <div><label>場所</label><select id="f_place"><option>摩周湖</option><option>屈斜路湖</option><option>川湯温泉</option><option>硫黄山</option><option>その他</option></select></div>
+        <div><label>季節</label><select id="f_season"><option>春</option><option>夏</option><option>秋</option><option selected>冬</option></select></div>
+        <div><label>年代</label><select id="f_age"><option>10代</option><option>20代</option><option>30代</option><option selected>40代</option><option>50代</option><option>60代以上</option></select></div>
+      </div>
+      <label>評価</label><div class="stars" id="f_stars"></div>
+      <label>口コミ（300文字まで）</label><textarea id="f_body" maxlength="300" placeholder="例：冬の摩周湖は霧がなく、青さに感動しました。ただバスの本数が少なく移動が大変でした。"></textarea>
+      <p style="margin-top:10px"><button class="btn" id="f_send">投稿する</button> <span class="note" id="f_msg"></span></p>
+      <div id="f_result"></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:baseline;gap:10px"><span class="count" id="cnt">-</span><span>件 貯まっています</span><span class="note" id="cntNote"></span></div>
+      <p class="note">5秒ごとに自動で更新。みんなの投稿が、目の前で増えていきます。</p>
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 分析する -->
+<section id="analyze">
+  <h2>③ 分析する：仕込んだ傾向を、AIは見抜けるか</h2>
+  <p class="lead"><span class="tag way">つながり方：API</span> 分析ボタンを押すと、アプリが貯まった口コミをまとめてAIに渡して質問します。</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>集計（データそのもの）</h3>
+      <p class="legend">緑＝良い　赤＝悪い　灰＝どちらでも</p>
+      <h4 style="margin:10px 0 2px">季節ごと</h4><div class="bars" id="bySeason"></div>
+      <h4 style="margin:14px 0 2px">話題ごと</h4><div class="bars" id="byTopic"></div>
+      <h4 style="margin:14px 0 2px">場所ごと（平均★）</h4><div class="bars" id="byPlace"></div>
+    </div>
+    <div class="card">
+      <h3>AIに聞く（分析ボタン）</h3>
+      <div id="qs"></div>
+      <label>質問（200文字まで）</label><textarea id="q" maxlength="200">冬の口コミで、不満が多いのは何ですか？</textarea>
+      <label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="guard" checked style="width:auto"> 守りあり（データの中の指示に従わないようAIに伝える）</label>
+      <p><button class="btn" id="askBtn">AIに分析させる</button> <span class="note" id="askMsg"></span></p>
+      <div class="answer" id="ans">ここに答えが出ます</div>
+      <p class="note">当たったら「その根拠の数字は？」と追加で聞いてみましょう。AIの答えは、左の集計（元データ）で必ず確かめます。</p>
+      <h3 style="margin-top:16px">自分のAIで分析する（チャット）</h3>
+      <p class="note">データをコピーして、ふだんのAIチャットに貼り付けて質問することもできます。</p>
+      <button class="btn ghost" id="copyData">口コミデータをコピー</button>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 持ち帰る -->
+<section id="take">
+  <h2>④ 持ち帰る：自分のアカウントへ</h2>
+  <p class="lead">今日は「自分のURLが出るところまで」でOK。STEP 3 は事後課題でも大丈夫です。</p>
+  <div class="card">
+    <ol class="steps">
+      <li><b>GitHubにコピーする</b><br>下のボタンで、このサイトのコードを自分のGitHubにコピーします（右上の <b>Use this template</b> → <b>Create a new repository</b>）。<br><a class="btn" id="repoBtn" target="_blank">GitHubでコピーを作る</a></li>
+      <li><b>Vercelで公開する</b><br>Vercelで <b>Add New → Project</b> を開き、いま作ったリポジトリの <b>Import</b> → <b>Deploy</b>。1分ほどで <code>https://〇〇.vercel.app</code> が出ます。<br><a class="btn" href="https://vercel.com/new" target="_blank">Vercelを開く</a></li>
+      <li><b>自分のSupabaseにつなぐ（事後課題でOK）</b><br>
+        ① Supabaseで新しいプロジェクトを作る → ② <b>SQL Editor</b> に下のSQLを貼って <b>Run</b> → ③ <b>Project Settings → API Keys</b> の URL と <b>publishable key</b> を、GitHubの <code>config.js</code> に書き換えて保存（Vercelが自動で更新）。<br>
+        <button class="btn ghost" id="copySql">SQLをコピー</button> <a class="btn ghost" href="setup.sql" target="_blank">SQLを見る</a>
+        <p class="warn" style="margin-top:8px">config.js に書いてよいのは <b>publishable key（公開キー）だけ</b>。secret key（秘密キー）は絶対に書かないでください。GitHubは誰でも見られます。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ルールとキー -->
+<section id="rules">
+  <h2>教育現場の5つのルール</h2>
+  <div class="card">
+    <ol>
+      <li>本物の生徒情報・個人情報は入れない（練習はダミーデータで）</li>
+      <li>鍵は環境変数に置き、GitHubには上げない</li>
+      <li>RLSは必ずON、AIに渡す権限は最小限に</li>
+      <li>公開URLは誰でも見られる前提で、公開範囲と投稿の確認を決める</li>
+      <li>AIの出力（コード・分析結果）は、必ず人が確認する</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h3>このサイトのRLS（行レベルセキュリティ）</h3>
+    <div class="bars" style="font-size:14px">
+      <p>読む：誰でも（非表示にした口コミは除く）</p>
+      <p>書く：誰でも。ただし文字数・★1〜5・場所や季節の選択肢に制限</p>
+      <p>直す・消す：管理者だけ（ポリシーなし＝禁止）</p>
+    </div>
+    <p class="note">基本は全部禁止、必要なものだけ許可する。右下の「裏側を見る」で、ブラウザが実際に送っているリクエストを確認できます。</p>
+  </div>
+</section>
+</main>
+
+<button class="btn" id="peek">裏側を見る</button>
+<div id="peekPanel"><b>ブラウザ ⇄ サーバーのやり取り（新しい順）</b><div id="peekLog"></div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

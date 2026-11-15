@@ -1,0 +1,19 @@
+/* 青楓館ロゴ（背景の透かし）とキャラクター。画像は img/ フォルダ */
+:root{--logo:url("img/logo.webp")}
+body::before{content:"";position:fixed;left:50%;top:55%;width:min(78vmin,720px);aspect-ratio:1;transform:translate(-50%,-50%);background:var(--logo) center/contain no-repeat;opacity:.07;pointer-events:none;z-index:0}
+header,nav,main,#peek,#peekPanel,.toast{position:relative;z-index:1}#peek{position:fixed;z-index:20}#peekPanel{position:fixed}.toast{position:fixed}nav{position:sticky}
+.pg{position:absolute;display:block;width:112px;height:112px;background:center bottom/contain no-repeat;pointer-events:none;z-index:2}
+section{position:relative}section>h2,section>.lead{padding-right:130px}
+.pg.tr{right:0;top:-6px}.pg.sm{width:64px;height:64px}
+header{position:relative;overflow:visible}.pg.hd{right:16px;bottom:-10px;width:60px;height:60px}
+.pg.peek{position:fixed;right:22px;bottom:52px;width:74px;height:74px;z-index:19}
+@media(max-width:760px){.pg.peek{display:none}.pg{width:72px;height:72px}section>h2,section>.lead{padding-right:80px}.pg.hd{display:none}}
+.pg-c1{background-image:url("img/c1.webp")}
+.pg-c2{background-image:url("img/c2.webp")}
+.pg-c4{background-image:url("img/c4.webp")}
+.pg-c5{background-image:url("img/c5.webp")}
+.pg-c6{background-image:url("img/c6.webp")}
+.pg-c9{background-image:url("img/c9.webp")}
+.pg-c10{background-image:url("img/c10.webp")}
+.pg-c11{background-image:url("img/c11.webp")}
+.pg-c12{background-image:url("img/c12.webp")}

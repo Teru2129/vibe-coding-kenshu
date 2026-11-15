@@ -7,12 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="brand.css">
 <script src="config.js"></script>
 </head>
 <body>
 <header>
   <h1>バイブコーディング研修 練習サイト</h1>
   <span class="sub">作って、貯めて、分析する｜青楓館のPBL口コミで体験（練習用ダミー）</span>
+  <i class="pg hd pg-c1" aria-hidden="true"></i>
 </header>
 <nav id="tabs">
   <button data-t="make" class="on">① つくる</button>
@@ -26,6 +28,7 @@
 
 <!-- ① つくる -->
 <section id="make" class="on">
+  <i class="pg tr pg-c6" aria-hidden="true"></i>
   <h2>① つくる：青楓館のPBL紹介LP</h2>
   <p class="lead"><span class="tag way">つながり方：チャット</span> ふだん使っているAI（ChatGPT・Gemini・Claudeなど、無料でOK）に頼んで作ります。</p>
   <div class="card three">
@@ -66,6 +69,7 @@
 
 <!-- ② 貯める -->
 <section id="store">
+  <i class="pg tr pg-c2" aria-hidden="true"></i>
   <h2>② 貯める：AIが整理しながら貯める</h2>
   <p class="lead"><span class="tag way">つながり方：API</span> 投稿した瞬間、アプリが裏でAIを呼び出し「良い／悪い」「地域の人・チーム・発表…」を判定して一緒に保存します。</p>
   <div class="grid2">
@@ -93,6 +97,7 @@
 
 <!-- ③ 分析する -->
 <section id="analyze">
+  <i class="pg tr pg-c10" aria-hidden="true"></i>
   <h2>③ 分析する：仕込んだ傾向を、AIは見抜けるか</h2>
   <p class="lead"><span class="tag way">つながり方：API</span> 分析ボタンを押すと、アプリが貯まった口コミをまとめてAIに渡して質問します。</p>
   <div class="grid2">
@@ -109,7 +114,7 @@
       <label>質問（200文字まで）</label><textarea id="q" maxlength="200">高1の生徒が一番困っていることは何ですか？</textarea>
       <label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="guard" checked style="width:auto"> 守りあり（データの中の指示に従わないようAIに伝える）</label>
       <p><button class="btn" id="askBtn">AIに分析させる</button> <span class="note" id="askMsg"></span></p>
-      <div class="answer" id="ans">ここに答えが出ます</div>
+      <div style="position:relative"><div class="answer" id="ans" style="padding-right:76px">ここに答えが出ます</div><i class="pg sm pg-c11" style="right:6px;bottom:4px" aria-hidden="true"></i></div>
       <p class="note">当たったら「その根拠の数字は？」と追加で聞いてみましょう。AIの答えは、左の集計（元データ）で必ず確かめます。</p>
       <h3 style="margin-top:16px">自分のAIで分析する（チャット）</h3>
       <p class="note">データをコピーして、ふだんのAIチャットに貼り付けて質問することもできます。</p>
@@ -120,6 +125,7 @@
 
 <!-- ④ 持ち帰る -->
 <section id="take">
+  <i class="pg tr pg-c12" aria-hidden="true"></i>
   <h2>④ 持ち帰る：自分のアカウントへ</h2>
   <p class="lead">今日は「自分のURLが出るところまで」でOK。STEP 3 は事後課題でも大丈夫です。</p>
   <div class="card">
@@ -137,6 +143,7 @@
 
 <!-- 設定を見る -->
 <section id="setup">
+  <i class="pg tr pg-c4" aria-hidden="true"></i>
   <h2>設定を見る：7つの機能の「概要・設定・意味」</h2>
   <p class="lead">このサイトを動かしている7つの機能です（②貯める→③分析する→④持ち帰るで使う順）。それぞれ「何をするものか」「実際にどう設定しているか」「なぜ大事か」をまとめました。クリックで開きます。</p>
   <div class="card">
@@ -280,6 +287,7 @@ SUPABASE_SERVICE_ROLE_KEY                       ← 自動で用意される</pr
 
 <!-- ルールとキー -->
 <section id="rules">
+  <i class="pg tr pg-c9" aria-hidden="true"></i>
   <h2>教育現場の5つのルール</h2>
   <div class="card">
     <ol>
@@ -302,6 +310,7 @@ SUPABASE_SERVICE_ROLE_KEY                       ← 自動で用意される</pr
 </section>
 </main>
 
+<i class="pg peek pg-c5" aria-hidden="true"></i>
 <button class="btn" id="peek">裏側を見る</button>
 <div id="peekPanel"><b>ブラウザ ⇄ サーバーのやり取り（新しい順）</b><div id="peekLog"></div></div>
 <div class="toast" id="toast"></div>

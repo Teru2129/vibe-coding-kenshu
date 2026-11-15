@@ -33,11 +33,11 @@ document.getElementById("f_send").onclick = async () => {
   const kj = keywordJudge(body, rating);
   const row = {
     author: document.getElementById("f_author").value.trim() || "名無し",
-    place: document.getElementById("f_place").value, season: document.getElementById("f_season").value,
-    age_group: document.getElementById("f_age").value, rating, body,
+    project: document.getElementById("f_project").value, grade: document.getElementById("f_grade").value,
+    campus: document.getElementById("f_campus").value, rating, body,
     sentiment: kj.sentiment, topic: kj.topic, judged_by: "keyword",
   };
-  const { data, error } = await sb.from("vc_reviews").insert(row).select("id").single();
+  const { data, error } = await sb.from("vc_pbl").insert(row).select("id").single();
   if (error) { msg.textContent = "保存できませんでした：" + error.message; btn.disabled = false; return; }
   document.getElementById("f_body").value = "";
   const res = document.getElementById("f_result");
@@ -59,12 +59,12 @@ document.getElementById("f_send").onclick = async () => {
 // 一覧
 async function loadList() {
   const [{ count }, { data }] = await Promise.all([
-    sb.from("vc_reviews").select("id", { count: "exact", head: true }),
-    sb.from("vc_reviews").select("id,created_at,author,place,season,age_group,rating,body,sentiment,topic,judged_by,source").order("created_at", { ascending: false }).limit(60),
+    sb.from("vc_pbl").select("id", { count: "exact", head: true }),
+    sb.from("vc_pbl").select("id,created_at,author,project,grade,campus,rating,body,sentiment,topic,judged_by,source").order("created_at", { ascending: false }).limit(60),
   ]);
   document.getElementById("cnt").textContent = count ?? "-";
   document.getElementById("list").innerHTML = (data || []).map(r => `
-    <div class="rv"><div class="meta">${esc(r.author)}｜${esc(r.place)}｜${esc(r.season)}｜${esc(r.age_group)}｜${"★".repeat(r.rating)}${r.source === "dummy" ? '｜<span class="tag">ダミー</span>' : ""}</div>
+    <div class="rv"><div class="meta">${esc(r.author)}｜${esc(r.project)}｜${esc(r.grade)}｜${esc(r.campus)}｜${"★".repeat(r.rating)}${r.source === "dummy" ? '｜<span class="tag">ダミー</span>' : ""}</div>
     <div class="body">${esc(r.body)}</div>
     <div>${r.sentiment ? `<span class="tag ${r.sentiment === "良い" ? "good" : r.sentiment === "悪い" ? "bad" : ""}">${esc(r.sentiment)}</span>` : ""}${r.topic ? `<span class="tag">${esc(r.topic)}</span>` : ""}${r.judged_by === "ai" ? '<span class="tag ai">AI判定</span>' : r.judged_by === "keyword" ? '<span class="tag">キーワード判定</span>' : ""}</div></div>`).join("");
 }
@@ -73,23 +73,23 @@ loadList(); setInterval(() => { if (document.getElementById("store").classList.c
 // 集計
 let allRows = [];
 async function loadStats() {
-  const { data } = await sb.from("vc_reviews").select("place,season,age_group,rating,sentiment,topic,body").limit(1000);
+  const { data } = await sb.from("vc_pbl").select("project,grade,campus,rating,sentiment,topic,body").limit(1000);
   allRows = data || [];
   const bar = (key, keys) => keys.map(k => {
     const rs = allRows.filter(r => r[key] === k), n = rs.length || 1;
     const g = rs.filter(r => r.sentiment === "良い").length, b = rs.filter(r => r.sentiment === "悪い").length, m = rs.length - g - b;
     return `<div class="b"><span>${k}</span><div class="track"><div class="fill" style="width:${g / n * 100}%"></div><div class="fill bad" style="width:${b / n * 100}%"></div><div class="fill mid" style="width:${m / n * 100}%"></div></div><span>${rs.length}件</span></div>`;
   }).join("");
-  document.getElementById("bySeason").innerHTML = bar("season", ["春", "夏", "秋", "冬"]);
-  document.getElementById("byTopic").innerHTML = bar("topic", ["景色", "食事", "交通", "宿泊", "温泉", "その他"]);
-  document.getElementById("byPlace").innerHTML = ["摩周湖", "屈斜路湖", "川湯温泉", "硫黄山", "その他"].map(p => {
-    const rs = allRows.filter(r => r.place === p); const avg = rs.length ? rs.reduce((a, r) => a + r.rating, 0) / rs.length : 0;
+  document.getElementById("byGrade").innerHTML = bar("grade", ["高1", "高2", "高3"]);
+  document.getElementById("byTopic").innerHTML = bar("topic", ["地域の人", "チーム", "発表", "AI活用", "時間・準備", "学び", "その他"]);
+  document.getElementById("byProject").innerHTML = ["輪島", "沖縄", "文房具", "芦屋校舎", "大津町", "その他"].map(p => {
+    const rs = allRows.filter(r => r.project === p); const avg = rs.length ? rs.reduce((a, r) => a + r.rating, 0) / rs.length : 0;
     return `<div class="b"><span>${p}</span><div class="track"><div class="fill" style="width:${avg / 5 * 100}%"></div></div><span>★${avg.toFixed(1)}</span></div>`;
   }).join("");
 }
 
 // 質問の例
-["冬の口コミで、不満が多いのは何ですか？", "20代が高く評価している場所は？", "改善するなら、何から手をつけるべき？", "全体の評価をひとことで報告して"].forEach(t => {
+["高1の生徒が一番困っていることは何ですか？", "一番評価が高いプロジェクトと、その理由は？", "来年のPBLで、先生が改善すべきことは？", "全体の評価をひとことで報告して"].forEach(t => {
   const b = document.createElement("button"); b.className = "btn ghost"; b.style.margin = "0 6px 6px 0"; b.style.fontSize = "13px"; b.textContent = t;
   b.onclick = () => document.getElementById("q").value = t; document.getElementById("qs").append(b);
 });
@@ -113,9 +113,9 @@ document.getElementById("askBtn").onclick = async () => {
 // データをコピー（チャットで分析）
 document.getElementById("copyData").onclick = async () => {
   if (!allRows.length) await loadStats();
-  const head = "場所,季節,年代,評価,判定,話題,本文\n";
-  const csv = allRows.map(r => [r.place, r.season, r.age_group, r.rating, r.sentiment ?? "", r.topic ?? "", `"${r.body.replace(/"/g, '""')}"`].join(",")).join("\n");
-  await navigator.clipboard.writeText("次の口コミデータを分析してください。\n\n" + head + csv); toast(`${allRows.length}件をコピーしました`);
+  const head = "プロジェクト,学年,校舎,評価,判定,話題,本文\n";
+  const csv = allRows.map(r => [r.project, r.grade, r.campus, r.rating, r.sentiment ?? "", r.topic ?? "", `"${r.body.replace(/"/g, '""')}"`].join(",")).join("\n");
+  await navigator.clipboard.writeText("次のPBLの口コミデータ（練習用ダミー）を分析してください。\n\n" + head + csv); toast(`${allRows.length}件をコピーしました`);
 };
 
 // ④

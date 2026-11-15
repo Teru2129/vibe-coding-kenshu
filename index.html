@@ -46,7 +46,7 @@
 入れたい機能：
 ・プロジェクトごとのカード
 ・PBLに参加した生徒の口コミ欄（ニックネーム・プロジェクト・学年・★1〜5・本文）
-雰囲気：明るく、やわらかい緑。スマホで見やすく</pre>
+雰囲気：青楓館ブルー（#05a8dd）を基調に明るく。スマホで見やすく</pre>
       <button class="btn" data-copy="p1">プロンプトをコピー</button>
       <p class="note">型：目的 → 使う人 → 機能 → 見た目。うまくいかないときは、どこが違うかを1つずつ伝えます。</p>
     </div>
@@ -98,7 +98,7 @@
   <div class="grid2">
     <div class="card">
       <h3>集計（データそのもの）</h3>
-      <p class="legend">緑＝良い　赤＝悪い　灰＝どちらでも</p>
+      <p class="legend">青＝良い　赤＝悪い　灰＝どちらでも</p>
       <h4 style="margin:10px 0 2px">学年ごと</h4><div class="bars" id="byGrade"></div>
       <h4 style="margin:14px 0 2px">話題ごと</h4><div class="bars" id="byTopic"></div>
       <h4 style="margin:14px 0 2px">プロジェクトごと（平均★）</h4><div class="bars" id="byProject"></div>
@@ -143,7 +143,7 @@
     <h3>システム構成図：どこが何をしているか</h3>
     <svg class="arch" viewBox="0 0 960 460" role="img" aria-label="システム構成図">
       <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#475569"/></marker></defs>
-      <style>.bx{fill:#fff;stroke:#94a3b8;stroke-width:1.5}.zn{fill:#f1f5f9;stroke:#cbd5e1;stroke-dasharray:5 4}.t{font:700 15px "Noto Sans JP",sans-serif;fill:#1f2937}.s{font:12px "Noto Sans JP",sans-serif;fill:#64748b}.zt{font:700 12px "Noto Sans JP",sans-serif;fill:#64748b}.ln{stroke:#475569;stroke-width:1.6;fill:none;marker-end:url(#ah)}.lb{font:12px "Noto Sans JP",sans-serif;fill:#0f766e}.n{fill:#0f766e}.nt{font:700 12px sans-serif;fill:#fff;text-anchor:middle}.key{fill:#fef3c7;stroke:#f59e0b}</style>
+      <style>.bx{fill:#fff;stroke:#94a3b8;stroke-width:1.5}.zn{fill:#f1f5f9;stroke:#cbd5e1;stroke-dasharray:5 4}.t{font:700 15px "Noto Sans JP",sans-serif;fill:#333333}.s{font:12px "Noto Sans JP",sans-serif;fill:#64748b}.zt{font:700 12px "Noto Sans JP",sans-serif;fill:#64748b}.ln{stroke:#475569;stroke-width:1.6;fill:none;marker-end:url(#ah)}.lb{font:12px "Noto Sans JP",sans-serif;fill:#0a86b4}.n{fill:#05a8dd}.nt{font:700 12px sans-serif;fill:#fff;text-anchor:middle}.key{fill:#fef3c7;stroke:#f59e0b}</style>
       <!-- 参加者 -->
       <rect class="bx" x="20" y="170" width="170" height="90" rx="12"/>
       <text class="t" x="40" y="205">参加者のブラウザ</text><text class="s" x="40" y="228">スマホ・PCで開く</text><text class="s" x="40" y="246">公開キーだけ持っている</text>
@@ -157,7 +157,7 @@
       <!-- Supabase -->
       <rect class="zn" x="240" y="190" width="460" height="220" rx="12"/><text class="zt" x="252" y="210">Supabase（サーバー側）</text>
       <rect class="bx" x="256" y="224" width="200" height="170" rx="10"/><text class="t" x="270" y="256">データベース</text><text class="s" x="270" y="278">表 vc_pbl に口コミを貯める</text>
-      <rect x="270" y="296" width="172" height="80" rx="8" fill="#ecfdf5" stroke="#0f766e"/><text class="t" x="282" y="322" style="font-size:13px">RLS（門番）</text><text class="s" x="282" y="342">読む：非表示以外OK</text><text class="s" x="282" y="360">書く：OK／直す・消す：×</text>
+      <rect x="270" y="296" width="172" height="80" rx="8" fill="#edfbfe" stroke="#05a8dd"/><text class="t" x="282" y="322" style="font-size:13px">RLS（門番）</text><text class="s" x="282" y="342">読む：非表示以外OK</text><text class="s" x="282" y="360">書く：OK／直す・消す：×</text>
       <rect class="bx" x="484" y="224" width="200" height="170" rx="10"/><text class="t" x="498" y="256">Edge Function</text><text class="s" x="498" y="278">vc-classify（判定）</text><text class="s" x="498" y="296">vc-analyze（分析）</text>
       <rect class="key" x="498" y="316" width="172" height="60" rx="8"/><text class="t" x="510" y="340" style="font-size:13px">Secrets（金庫）</text><text class="s" x="510" y="360">秘密キーはここだけ</text>
       <path class="ln" d="M484,250 L458,250"/>

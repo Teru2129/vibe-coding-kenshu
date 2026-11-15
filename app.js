@@ -11,6 +11,7 @@ document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
   if (b.dataset.t === "analyze") loadStats();
   history.replaceState(null, "", "#" + b.dataset.t);
 });
+document.querySelectorAll("[data-go]").forEach(a => a.onclick = e => { e.preventDefault(); document.querySelector(`#tabs button[data-t="${a.dataset.go}"]`)?.click(); scrollTo(0,0); });
 const h = location.hash.slice(1); if (h) document.querySelector(`#tabs button[data-t="${h}"]`)?.click();
 
 // コピー

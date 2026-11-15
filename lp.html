@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>弟子屈町を歩く｜見本LP（研修用）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+body{margin:0;font-family:"Noto Sans JP",sans-serif;color:#17324d;background:#f4f9f8;line-height:1.8}
+.hero{background:linear-gradient(180deg,#0b4f6c 0%,#1b7a8c 55%,#3a9d6f 100%);color:#fff;padding:64px 20px 48px;text-align:center}
+.hero h1{font-size:34px;margin:0 0 8px;font-weight:900}.hero p{margin:0;opacity:.9}
+.wx{display:inline-block;margin-top:20px;background:rgba(255,255,255,.15);border-radius:12px;padding:10px 18px;font-size:15px}
+.wrap{max-width:900px;margin:0 auto;padding:28px 20px}
+.spots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.spot{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.spot .ph{height:110px}.spot div.t{padding:12px}.spot h3{margin:0 0 4px;font-size:17px}.spot p{margin:0;font-size:14px;color:#4b6475}
+form{background:#fff;border-radius:12px;padding:18px;display:grid;gap:8px}
+input,select,textarea{font:inherit;padding:8px;border:1px solid #cbd5e1;border-radius:8px}
+button{font:inherit;background:#0f766e;color:#fff;border:0;border-radius:8px;padding:10px;cursor:pointer}
+.rv{background:#fff;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14px}
+.rv small{color:#64748b}
+footer{text-align:center;font-size:12px;color:#64748b;padding:24px}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>弟子屈町を歩く</h1>
+  <p>霧の摩周湖、湯けむりの川湯、日本最大のカルデラ湖・屈斜路湖</p>
+  <div class="wx" id="wx">今日の弟子屈の天気を読み込み中…</div>
+</div>
+<div class="wrap">
+  <h2>見どころ</h2>
+  <div class="spots">
+    <div class="spot"><div class="ph" style="background:linear-gradient(135deg,#0c4a6e,#38bdf8)"></div><div class="t"><h3>摩周湖</h3><p>透明度の高い、深い青の湖。霧の日も幻想的。</p></div></div>
+    <div class="spot"><div class="ph" style="background:linear-gradient(135deg,#065f46,#5eead4)"></div><div class="t"><h3>屈斜路湖</h3><p>砂を掘ると温泉が湧く砂湯。冬は白鳥が来ます。</p></div></div>
+    <div class="spot"><div class="ph" style="background:linear-gradient(135deg,#78350f,#fbbf24)"></div><div class="t"><h3>川湯温泉</h3><p>強酸性のお湯と、足湯のある温泉街。</p></div></div>
+    <div class="spot"><div class="ph" style="background:linear-gradient(135deg,#57534e,#fde047)"></div><div class="t"><h3>硫黄山</h3><p>噴気が間近に見える活火山。</p></div></div>
+  </div>
+  <h2 style="margin-top:32px">口コミを書く</h2>
+  <form id="f">
+    <input id="a" maxlength="20" placeholder="ニックネーム（本名は書かないでください）">
+    <select id="p"><option>摩周湖</option><option>屈斜路湖</option><option>川湯温泉</option><option>硫黄山</option><option>その他</option></select>
+    <select id="s"><option>春</option><option>夏</option><option>秋</option><option selected>冬</option></select>
+    <select id="g"><option>10代</option><option>20代</option><option>30代</option><option selected>40代</option><option>50代</option><option>60代以上</option></select>
+    <select id="r"><option value="5">★★★★★</option><option value="4" selected>★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>
+    <textarea id="b" maxlength="300" rows="3" placeholder="口コミ（300文字まで）"></textarea>
+    <button>投稿する</button><small id="m"></small>
+  </form>
+  <h2 style="margin-top:24px">みんなの口コミ</h2>
+  <div id="list"></div>
+</div>
+<footer>研修用の見本ページです（弟子屈町の公式サイトではありません）｜天気の出典：Open-Meteo</footer>
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { keywordJudge, esc } from "./common.js";
+const C = window.VC_CONFIG, sb = createClient(C.SUPABASE_URL, C.SUPABASE_PUBLISHABLE_KEY);
+// キー不要のAPI：Open-Meteo（弟子屈町 北緯43.48 東経144.46）
+const WMO = { 0: "快晴", 1: "晴れ", 2: "晴れ時々くもり", 3: "くもり", 45: "霧", 48: "霧", 51: "霧雨", 61: "雨", 63: "雨", 65: "強い雨", 71: "雪", 73: "雪", 75: "大雪", 80: "にわか雨", 85: "にわか雪" };
+fetch("https://api.open-meteo.com/v1/forecast?latitude=43.48&longitude=144.46&current=temperature_2m,weather_code&timezone=Asia%2FTokyo")
+  .then(r => r.json()).then(j => { const c = j.current; document.getElementById("wx").textContent = `今日の弟子屈：${WMO[c.weather_code] ?? "—"}　${c.temperature_2m}℃`; })
+  .catch(() => document.getElementById("wx").textContent = "天気を取得できませんでした");
+async function load() {
+  const { data } = await sb.from("vc_reviews").select("author,place,season,rating,body").order("created_at", { ascending: false }).limit(10);
+  document.getElementById("list").innerHTML = (data || []).map(r => `<div class="rv"><small>${esc(r.author)}｜${esc(r.place)}｜${esc(r.season)}｜${"★".repeat(r.rating)}</small><br>${esc(r.body)}</div>`).join("");
+}
+load();
+document.getElementById("f").onsubmit = async e => {
+  e.preventDefault(); const body = document.getElementById("b").value.trim(); if (!body) return;
+  const rating = +document.getElementById("r").value, kj = keywordJudge(body, rating);
+  const { error } = await sb.from("vc_reviews").insert({ author: document.getElementById("a").value.trim() || "名無し", place: document.getElementById("p").value,
+    season: document.getElementById("s").value, age_group: document.getElementById("g").value, rating, body, sentiment: kj.sentiment, topic: kj.topic, judged_by: "keyword" });
+  document.getElementById("m").textContent = error ? "保存できませんでした：" + error.message : "ありがとうございます！";
+  if (!error) { document.getElementById("b").value = ""; load(); }
+};
+</script>
+</body>
+</html>

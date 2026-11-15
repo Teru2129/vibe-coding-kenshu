@@ -12,7 +12,7 @@
 <body>
 <header>
   <h1>バイブコーディング研修 練習サイト</h1>
-  <span class="sub">作って、貯めて、分析する｜弟子屈町の口コミで体験</span>
+  <span class="sub">作って、貯めて、分析する｜青楓館のPBL口コミで体験（練習用ダミー）</span>
 </header>
 <nav id="tabs">
   <button data-t="make" class="on">① つくる</button>
@@ -25,31 +25,31 @@
 
 <!-- ① つくる -->
 <section id="make" class="on">
-  <h2>① つくる：弟子屈町の観光LP</h2>
+  <h2>① つくる：青楓館のPBL紹介LP</h2>
   <p class="lead"><span class="tag way">つながり方：チャット</span> ふだん使っているAI（ChatGPT・Gemini・Claudeなど、無料でOK）に頼んで作ります。</p>
   <div class="grid2">
     <div class="card">
       <h3>頼み方の型（コピーして、AIに貼り付け）</h3>
-      <pre class="prompt" id="p1">弟子屈町の観光LPを、1つのHTMLファイルで作ってください。
-目的：旅行者に弟子屈の魅力を伝え、口コミを集める
-使う人：スマホで旅先を調べている人
-見せたい場所：摩周湖・屈斜路湖・川湯温泉・硫黄山
+      <pre class="prompt" id="p1">青楓館高等学院のPBL（課題解決型学習）を紹介するLPを、1つのHTMLファイルで作ってください。
+目的：中学生と保護者に、青楓館のPBLの魅力を伝える
+使う人：スマホで学校を調べている中学生と保護者
+載せたいプロジェクト：輪島・沖縄・文房具・芦屋校舎・大津町
 入れたい機能：
-・今日の弟子屈の天気（Open-Meteo の無料APIを使う。キー不要）
-・口コミ投稿欄（名前・場所・季節・★1〜5・本文）
-雰囲気：自然の青と緑。スマホで見やすく</pre>
+・プロジェクトごとのカード
+・PBLに参加した生徒の口コミ欄（ニックネーム・プロジェクト・学年・★1〜5・本文）
+雰囲気：明るく、やわらかい緑。スマホで見やすく</pre>
       <button class="btn" data-copy="p1">プロンプトをコピー</button>
       <p class="note">型：目的 → 使う人 → 機能 → 見た目。うまくいかないときは、どこが違うかを1つずつ伝えます。</p>
     </div>
     <div class="card">
       <h3>見本のLP</h3>
-      <p>天気はキー不要のAPIから、口コミはこのサイトの共有データベースに保存されます。</p>
+      <p>口コミ欄は、このサイトの共有データベースにつながっています。</p>
       <a class="btn" href="lp.html" target="_blank">見本のLPを開く</a>
       <h3 style="margin-top:18px">早く終わった人へ</h3>
       <pre class="prompt" id="p2">次の点を直してください。
-・摩周湖の写真の代わりに、色のグラデーションで湖を表現して
-・口コミ投稿欄に「どの季節に行きましたか」を追加して
-・ページの一番下に「出典：Open-Meteo」と表示して</pre>
+・一番上に「PBLって何？」を中学生向けに3行で説明する欄を追加して
+・口コミを★の多い順に並べ替えるボタンを付けて
+・ページの一番下に「研修用の見本です」と表示して</pre>
       <button class="btn ghost" data-copy="p2">追加の頼み方をコピー</button>
     </div>
   </div>
@@ -58,24 +58,24 @@
 <!-- ② 貯める -->
 <section id="store">
   <h2>② 貯める：AIが整理しながら貯める</h2>
-  <p class="lead"><span class="tag way">つながり方：API</span> 投稿した瞬間、アプリが裏でAIを呼び出し「良い／悪い」「景色・食事・交通…」を判定して一緒に保存します。</p>
+  <p class="lead"><span class="tag way">つながり方：API</span> 投稿した瞬間、アプリが裏でAIを呼び出し「良い／悪い」「地域の人・チーム・発表…」を判定して一緒に保存します。</p>
   <div class="grid2">
     <div class="card">
-      <h3>口コミを投稿する</h3>
-      <div class="warn">本物の個人情報は書かないでください。名前はニックネームで。</div>
+      <h3>PBLの口コミを投稿する（生徒になったつもりで）</h3>
+      <div class="warn">ここにある口コミはすべて練習用のダミーです。本物の生徒の名前や個人情報は書かないでください。</div>
       <label>ニックネーム（20文字まで）</label><input id="f_author" maxlength="20" placeholder="例：ふじ">
       <div class="row">
-        <div><label>場所</label><select id="f_place"><option>摩周湖</option><option>屈斜路湖</option><option>川湯温泉</option><option>硫黄山</option><option>その他</option></select></div>
-        <div><label>季節</label><select id="f_season"><option>春</option><option>夏</option><option>秋</option><option selected>冬</option></select></div>
-        <div><label>年代</label><select id="f_age"><option>10代</option><option>20代</option><option>30代</option><option selected>40代</option><option>50代</option><option>60代以上</option></select></div>
+        <div><label>プロジェクト</label><select id="f_project"><option>輪島</option><option>沖縄</option><option>文房具</option><option>芦屋校舎</option><option>大津町</option><option>その他</option></select></div>
+        <div><label>学年</label><select id="f_grade"><option>高1</option><option selected>高2</option><option>高3</option></select></div>
+        <div><label>校舎</label><select id="f_campus"><option>明石校</option><option>芦屋校</option></select></div>
       </div>
       <label>評価</label><div class="stars" id="f_stars"></div>
-      <label>口コミ（300文字まで）</label><textarea id="f_body" maxlength="300" placeholder="例：冬の摩周湖は霧がなく、青さに感動しました。ただバスの本数が少なく移動が大変でした。"></textarea>
+      <label>口コミ（300文字まで）</label><textarea id="f_body" maxlength="300" placeholder="例：地域の方に提案を真剣に聞いてもらえて自信がつきました。ただ、準備の時間が足りずに最後はバタバタでした。"></textarea>
       <p style="margin-top:10px"><button class="btn" id="f_send">投稿する</button> <span class="note" id="f_msg"></span></p>
       <div id="f_result"></div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:baseline;gap:10px"><span class="count" id="cnt">-</span><span>件 貯まっています</span><span class="note" id="cntNote"></span></div>
+      <div style="display:flex;align-items:baseline;gap:10px"><span class="count" id="cnt">-</span><span>件 貯まっています</span></div>
       <p class="note">5秒ごとに自動で更新。みんなの投稿が、目の前で増えていきます。</p>
       <div class="list" id="list"></div>
     </div>
@@ -90,14 +90,14 @@
     <div class="card">
       <h3>集計（データそのもの）</h3>
       <p class="legend">緑＝良い　赤＝悪い　灰＝どちらでも</p>
-      <h4 style="margin:10px 0 2px">季節ごと</h4><div class="bars" id="bySeason"></div>
+      <h4 style="margin:10px 0 2px">学年ごと</h4><div class="bars" id="byGrade"></div>
       <h4 style="margin:14px 0 2px">話題ごと</h4><div class="bars" id="byTopic"></div>
-      <h4 style="margin:14px 0 2px">場所ごと（平均★）</h4><div class="bars" id="byPlace"></div>
+      <h4 style="margin:14px 0 2px">プロジェクトごと（平均★）</h4><div class="bars" id="byProject"></div>
     </div>
     <div class="card">
       <h3>AIに聞く（分析ボタン）</h3>
       <div id="qs"></div>
-      <label>質問（200文字まで）</label><textarea id="q" maxlength="200">冬の口コミで、不満が多いのは何ですか？</textarea>
+      <label>質問（200文字まで）</label><textarea id="q" maxlength="200">高1の生徒が一番困っていることは何ですか？</textarea>
       <label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="guard" checked style="width:auto"> 守りあり（データの中の指示に従わないようAIに伝える）</label>
       <p><button class="btn" id="askBtn">AIに分析させる</button> <span class="note" id="askMsg"></span></p>
       <div class="answer" id="ans">ここに答えが出ます</div>

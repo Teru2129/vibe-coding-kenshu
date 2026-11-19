@@ -2,6 +2,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { keywordJudge, peek, toast, esc } from "./common.js";
 
 const C = window.VC_CONFIG;
+// 研修用の共有データベース以外（＝自分のSupabase）では、AI関数（有料のAPI）を自動でOFFにする
+const SHARED = "jlcvrwamtsjzdvpnczii";
+C.USE_AI_FUNCTIONS = C.USE_AI_FUNCTIONS && C.SUPABASE_URL.includes(SHARED);
+if (!C.USE_AI_FUNCTIONS) document.documentElement.classList.add("own-db");
 const sb = createClient(C.SUPABASE_URL, C.SUPABASE_PUBLISHABLE_KEY, { global: { fetch: peek.fetch } });
 
 // タブ

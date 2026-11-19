@@ -6,6 +6,6 @@ window.VC_CONFIG = {
   SUPABASE_PUBLISHABLE_KEY: "sb_publishable_4qOIxoIVb2NTaGTdWt2DpQ_iqdmzq62",
   // 自分のコピーを作るときに使う元のリポジトリ
   REPO_URL: "https://github.com/Teru2129/vibe-coding-kenshu",
-  // AI判定・分析（Edge Function）を使うか。自分のSupabaseに関数を置いていなければ false に
+  // AI判定・分析（Edge Function）を使うか。研修用の共有データベース以外では自動でOFFになります（書き換え不要）
   USE_AI_FUNCTIONS: true,
 };

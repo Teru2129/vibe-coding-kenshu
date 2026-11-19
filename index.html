@@ -109,13 +109,14 @@
       <h4 style="margin:14px 0 2px">プロジェクトごと（平均★）</h4><div class="bars" id="byProject"></div>
     </div>
     <div class="card">
-      <h3>AIに聞く（分析ボタン）</h3>
+      <p class="own-only warn" style="margin:0 0 10px">あなたのサイトは<b>自分のデータベース</b>につながっています。下の「口コミデータをコピー」→ ふだんのAI（無料でOK）に貼って質問してください。</p>
+      <div class="shared-only"><h3>AIに聞く（分析ボタン）</h3>
       <div id="qs"></div>
       <label>質問（200文字まで）</label><textarea id="q" maxlength="200">高1の生徒が一番困っていることは何ですか？</textarea>
       <label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="guard" checked style="width:auto"> 守りあり（データの中の指示に従わないようAIに伝える）</label>
       <p><button class="btn" id="askBtn">AIに分析させる</button> <span class="note" id="askMsg"></span></p>
       <div style="position:relative"><div class="answer" id="ans" style="padding-right:76px">ここに答えが出ます</div><i class="pg sm pg-c11" style="right:6px;bottom:4px" aria-hidden="true"></i></div>
-      <p class="note">当たったら「その根拠の数字は？」と追加で聞いてみましょう。AIの答えは、左の集計（元データ）で必ず確かめます。</p>
+      <p class="note">当たったら「その根拠の数字は？」と追加で聞いてみましょう。AIの答えは、左の集計（元データ）で必ず確かめます。</p></div>
       <h3 style="margin-top:16px">自分のAIで分析する（チャット）</h3>
       <p class="note">データをコピーして、ふだんのAIチャットに貼り付けて質問することもできます。</p>
       <button class="btn ghost" id="copyData">口コミデータをコピー</button>
@@ -127,13 +128,13 @@
 <section id="take">
   <i class="pg tr pg-c12" aria-hidden="true"></i>
   <h2>④ 持ち帰る：自分のアカウントへ</h2>
-  <p class="lead">今日は「自分のURLが出るところまで」でOK。STEP 3 は事後課題でも大丈夫です。</p>
+  <p class="lead">GitHub → Vercel → Supabase の順に、自分のアカウントで同じサイトを動かします。</p>
   <div class="card">
     <ol class="steps">
       <li><b>GitHubにコピーする</b><br>下のボタンで、このサイトのコードを自分のGitHubにコピーします（右上の <b>Use this template</b> → <b>Create a new repository</b>）。<br><a class="btn" id="repoBtn" target="_blank">GitHubでコピーを作る</a></li>
       <li><b>Vercelで公開する</b><br>Vercelで <b>Add New → Project</b> を開き、いま作ったリポジトリの <b>Import</b> → <b>Deploy</b>。1分ほどで <code>https://〇〇.vercel.app</code> が出ます。<br><a class="btn" href="https://vercel.com/new" target="_blank">Vercelを開く</a></li>
-      <li><b>自分のSupabaseにつなぐ（事後課題でOK）</b><br>
-        ① Supabaseで新しいプロジェクトを作る → ② <b>SQL Editor</b> に下のSQLを貼って <b>Run</b> → ③ <b>Project Settings → API Keys</b> の URL と <b>publishable key</b> を、GitHubの <code>config.js</code> に書き換えて保存（Vercelが自動で更新）。<br>
+      <li><b>自分のSupabaseにつなぐ</b><br>
+        ① Supabaseで新しいプロジェクトを作る → ② <b>SQL Editor</b> に下のSQLを貼って <b>Run</b>（表と練習用の口コミ100件ができます）→ ③ 画面上部の <b>Connect</b> で出る URL と <b>publishable key（公開キー）</b> を、GitHubの <code>config.js</code> の2か所に貼って保存（Vercelが自動で更新）。<br>
         <button class="btn ghost" id="copySql">SQLをコピー</button> <a class="btn ghost" href="setup.sql" target="_blank">SQLを見る</a>
         <p class="warn" style="margin-top:8px">config.js に書いてよいのは <b>publishable key（公開キー）だけ</b>。secret key（秘密キー）は絶対に書かないでください。GitHubは誰でも見られます。</p>
       </li>

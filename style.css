@@ -62,3 +62,7 @@ pre.code{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:12px;font-si
 .three{border-left:5px solid var(--brand);background:var(--teal-l)}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;font-size:14px}
 @media(max-width:760px){.grid3{grid-template-columns:1fr}}
+
+.own-only{display:none}
+.own-db .own-only{display:block}
+.own-db .shared-only{display:none}

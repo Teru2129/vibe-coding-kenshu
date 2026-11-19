@@ -134,7 +134,7 @@
       <li><b>GitHubにコピーする</b><br>下のボタンで、このサイトのコードを自分のGitHubにコピーします（右上の <b>Use this template</b> → <b>Create a new repository</b>）。<br><a class="btn" id="repoBtn" target="_blank">GitHubでコピーを作る</a></li>
       <li><b>Vercelで公開する</b><br>Vercelで <b>Add New → Project</b> を開き、いま作ったリポジトリの <b>Import</b> → <b>Deploy</b>。1分ほどで <code>https://〇〇.vercel.app</code> が出ます。<br><a class="btn" href="https://vercel.com/new" target="_blank">Vercelを開く</a></li>
       <li><b>自分のSupabaseにつなぐ</b><br>
-        ① Supabaseで新しいプロジェクトを作る → ② <b>SQL Editor</b> に下のSQLを貼って <b>Run</b>（表と練習用の口コミ100件ができます）→ ③ 画面上部の <b>Connect</b> で出る URL と <b>publishable key（公開キー）</b> を、GitHubの <code>config.js</code> の2か所に貼って保存（Vercelが自動で更新）。<br>
+        ① Supabaseで新しいプロジェクトを作る → ② <b>SQL Editor</b> に下のSQLを貼って <b>Run</b>（表と練習用の口コミ100件ができます）→ ③ 画面上部の <b>Connect</b> → <code>.env.local</code> の2行をコピーし、GitHubの <code>config.js</code> の2行と入れ替えて保存（Vercelが自動で更新）。<br>
         <button class="btn ghost" id="copySql">SQLをコピー</button> <a class="btn ghost" href="setup.sql" target="_blank">SQLを見る</a>
         <p class="warn" style="margin-top:8px">config.js に書いてよいのは <b>publishable key（公開キー）だけ</b>。secret key（秘密キー）は絶対に書かないでください。GitHubは誰でも見られます。</p>
       </li>

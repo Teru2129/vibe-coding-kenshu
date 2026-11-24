@@ -31,27 +31,21 @@
 <section id="make" class="on">
   <i class="pg tr pg-c6" aria-hidden="true"></i>
   <h2>① つくる：弟子屈観光MAP</h2>
-  <p class="lead"><span class="tag way">つながり方：チャット</span> ふだん使っているAI（ChatGPT・Gemini・Claudeなど、無料でOK）に頼んで、自分だけの「弟子屈町の観光MAP」を作り、自分のURLで公開します。</p>
-  <div class="card" style="border:2px solid var(--teal)">
-    <h3>🐣 はじめに：アイスブレイク（10分）</h3>
-    <div class="grid2">
-      <div>
-        <p><b>1. Geminiで「AI部のキャラクター」を作る（5分）</b><br>下の文をコピーして、〇〇を自分の言葉に書きかえて送ります。出てきた絵でOK、作り直しは1回まで。</p>
-        <pre class="prompt" id="ice1">私たちの学校の「AI部」のキャラクターを1体、画像で作ってください。
-・モチーフ：〇〇（好きな動物・もの）
-・性格：〇〇
-・このキャラがAI部でかなえたいこと：〇〇
-・やさしい雰囲気の立体的なイラスト、背景は白、文字は入れない</pre>
-        <button class="btn" data-copy="ice1">キャラの頼み方をコピー</button>
-        <p style="margin-top:14px"><b>2. 3〜4人で語り合う（5分・1人1分）</b><br>① キャラの名前と、込めた想い<br>② AIで、どんな先生になりたい？（やりたい・なりたい）<br>③ 聞いた人は「いいね」と、質問を1つ</p>
-        <p class="note">オンライン：ブレイクアウトルームで、画像はチャットに貼るか画面共有。会場：近くの3〜4人で画面を見せ合う。</p>
-      </div>
-      <div>
-        <img src="img/aibu-chara-sample.jpg" alt="AI部のキャラクターの例（シマエナガ）" style="width:100%;border-radius:8px;border:1px solid var(--line)">
-        <p class="note">例：シマエナガのAI部キャラ（Geminiで作成）。文字や背景が入っても気にしなくてOK。</p>
-      </div>
-    </div>
-  </div>
+  <p class="lead">上から順に1つずつ進めます。終わったら「できた！次へ」を押すと、次のステップが開きます。</p>
+<style>
+.stp-progress{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:14px;color:var(--mute)}
+.stp-bar{flex:1;height:8px;background:#e5e7eb;border-radius:99px;overflow:hidden}.stp-bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .3s}
+.stp-card{scroll-margin-top:64px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.stp-card.open{border:2px solid var(--brand);box-shadow:0 4px 14px rgba(5,168,221,.15)}
+.stp-head{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;padding:14px 18px;font:inherit;text-align:left;cursor:pointer}
+.stp-num{flex:none;width:32px;height:32px;border-radius:50%;background:#e5e7eb;color:var(--ink);display:grid;place-items:center;font-weight:900}
+.stp-card.open .stp-num{background:var(--brand);color:#fff}.stp-card.done .stp-num{background:var(--good);color:#fff}
+.stp-title{flex:1;font-weight:700;font-size:16px}.stp-min{font-size:13px;color:var(--mute)}
+.stp-state{font-size:13px;font-weight:700;color:var(--good);min-width:3.5em;text-align:right}
+.stp-card.done .stp-title{color:var(--mute)}
+.stp-body{display:none;padding:4px 18px 18px}.stp-card.open .stp-body{display:block}
+.stp-foot{margin-top:16px;text-align:right}
+</style>
   <div class="card three">
     <h3>バイブコーディングで大事な3つ</h3>
     <div class="grid3">
@@ -60,29 +54,48 @@
       <div><b>3. 速さ</b><br>完璧より、まず動く物を見せる。作って・見せて・直すを短く回すほど、理想に近づく。</div>
     </div>
   </div>
-  <div class="grid2">
-    <div class="card">
-      <h3>きょうのゴール（お手本）</h3>
-      <a href="https://teshikaga-map.vercel.app/" target="_blank"><img src="img/teshikaga-sample.jpg" alt="弟子屈観光MAPのお手本" style="width:100%;border-radius:8px;border:1px solid var(--line)"></a>
-      <p class="note">だれに・なにを・どんな形で見せるかは自由です。お手本と同じでなくてOK。</p>
-      <a class="btn" href="https://teshikaga-map.vercel.app/" target="_blank">お手本のMAPを開く</a>
-      <a class="btn ghost" href="videos.html">▶ 作業動画を見る</a>
-    </div>
-    <div class="card">
-      <h3>流れ（5ステップ）</h3>
-      <ol style="margin:0;padding-left:1.3em;line-height:1.9;font-size:14px">
-        <li><b>考える</b>：AIに質問してもらい、プロンプトを一緒に作る</li>
-        <li><b>AIで作る</b>：index.html を1ファイルで書いてもらう</li>
-        <li><b>GitHub</b>：New repository（teshikaga-map、Add README を On）→ Add file → Create new file → 名前は index.html、貼り付け → Commit changes</li>
-        <li><b>Vercel</b>：Import → 何も変えずに Deploy → 自分のURLを開く</li>
-        <li><b>直す</b>：AIに頼む → 全文コピー → 鉛筆マーク → 全部置きかえ → Commit</li>
-      </ol>
-      <p style="margin-top:10px"><a class="btn" href="https://github.com/new" target="_blank">GitHubで新しく作る</a> <a class="btn ghost" href="https://vercel.com/new" target="_blank">Vercelを開く</a></p>
+  <div class="stp-progress"><span>進み具合</span><div class="stp-bar"><i></i></div><b id="stpCount">0 / 8</b><button class="btn ghost" id="stpReset" type="button" style="padding:4px 10px;font-size:12px">はじめから</button></div>
+  <div class="stp-card" data-step="1">
+    <button class="stp-head" type="button"><span class="stp-num">1</span><span class="stp-title">アイスブレイク：AI部のキャラクターを作って語り合う</span><span class="stp-min">10分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <div class="grid2">
+        <div>
+          <p><b>① Geminiでキャラを作る（5分）</b><br>下の文をコピーして、〇〇を自分の言葉に書きかえて送ります。出てきた絵でOK、作り直しは1回まで。</p>
+          <pre class="prompt" id="ice1">私たちの学校の「AI部」のキャラクターを1体、画像で作ってください。
+・モチーフ：〇〇（好きな動物・もの）
+・性格：〇〇
+・このキャラがAI部でかなえたいこと：〇〇
+・やさしい雰囲気の立体的なイラスト、背景は白、文字は入れない</pre>
+          <button class="btn" data-copy="ice1">キャラの頼み方をコピー</button>
+          <p style="margin-top:14px"><b>② 3〜4人で語り合う（5分・1人1分）</b><br>・キャラの名前と、込めた想い<br>・AIで、どんな先生になりたい？（やりたい・なりたい）<br>・聞いた人は「いいね」と、質問を1つ</p>
+          <p class="note">オンライン：ブレイクアウトルームで、画像はチャットに貼るか画面共有。会場：近くの3〜4人で画面を見せ合う。</p>
+        </div>
+        <div>
+          <img src="img/aibu-chara-sample.jpg" alt="AI部のキャラクターの例" style="width:100%;border-radius:8px;border:1px solid var(--line)">
+          <p class="note">例：シマエナガのAI部キャラ（Geminiで作成）。文字や背景が入っても気にしなくてOK。</p>
+        </div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
     </div>
   </div>
-  <div class="grid2">
-    <div class="card">
-      <h3>0. 考える（コピーして、〇〇を書きかえて貼る）</h3>
+  <div class="stp-card" data-step="2">
+    <button class="stp-head" type="button"><span class="stp-num">2</span><span class="stp-title">きょうのゴールを見る（お手本の観光MAP）</span><span class="stp-min">1分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <div class="grid2">
+        <a href="https://teshikaga-map.vercel.app/" target="_blank"><img src="img/teshikaga-sample.jpg" alt="弟子屈観光MAPのお手本" style="width:100%;border-radius:8px;border:1px solid var(--line)"></a>
+        <div>
+          <p>今日は、自分だけの「弟子屈町の観光MAP」を作って、<b>自分のURLで公開</b>します。</p>
+          <p>だれに・なにを・どんな形で見せるかは自由です。お手本と同じでなくてOK。</p>
+          <a class="btn" href="https://teshikaga-map.vercel.app/" target="_blank">お手本のMAPを開く</a>
+        </div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
+    </div>
+  </div>
+  <div class="stp-card" data-step="3">
+    <button class="stp-head" type="button"><span class="stp-num">3</span><span class="stp-title">考える：AIに質問してもらい、プロンプトを一緒に作る</span><span class="stp-min">6分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <p>下の文をコピーして、〇〇を書きかえてAIに貼ります。AIの質問に答えていくと、頼み方（プロンプト）ができあがります。</p>
       <pre class="prompt" id="p1">弟子屈町（北海道）の観光MAPのWebページを作りたいです。
 だれに：〇〇
 なにを：〇〇
@@ -90,59 +103,150 @@
 作る前に、私に質問を3つして、AIにWebページを作ってもらうためのプロンプトを一緒に作ってください。</pre>
       <button class="btn" data-copy="p1">プロンプトをコピー</button>
       <p class="note">例）だれに：修学旅行で来る高校生／なにを：1日モデルコース／形：地図のピンを押すと説明が出る</p>
-    </div>
-    <div class="card">
-      <h3>1. AIで作る</h3>
-      <pre class="prompt" id="p2">上のプロンプトで、index.html の1ファイルだけで動くWebページを作ってください。
-CSSとJavaScriptも同じファイルに入れて、全文を1つのコードで返してください。</pre>
-      <button class="btn" data-copy="p2">プロンプトをコピー</button>
-      <p class="note">返ってきたコードは、右上のコピーボタンで全部コピーします。</p>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
     </div>
   </div>
-  <div class="grid2">
-    <div class="card">
-      <h3>2. 直す</h3>
-      <pre class="prompt" id="p3">いまのHTMLに、〇〇（例：冬の楽しみ方のコーナー）を追加してください。
-変更したあとの index.html の全文を返してください。</pre>
-      <button class="btn" data-copy="p3">プロンプトをコピー</button>
-      <p class="note">うまくいかないときは、どこが違うかを1つずつ伝えます。</p>
+  <div class="stp-card" data-step="4">
+    <button class="stp-head" type="button"><span class="stp-num">4</span><span class="stp-title">AIで作る：index.html を1ファイルで書いてもらう</span><span class="stp-min">4分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <div class="grid2">
+        <div>
+          <pre class="prompt" id="p2">上のプロンプトで、index.html の1ファイルだけで動くWebページを作ってください。
+CSSとJavaScriptも同じファイルに入れて、全文を1つのコードで返してください。</pre>
+          <button class="btn" data-copy="p2">プロンプトをコピー</button>
+          <p class="note">返ってきたコードは、右上のコピーボタンで全部コピーします。途中で切れたら「続きを書いて」と頼みます。</p>
+        </div>
+        <div><p class="note" style="margin:0">▶ 作業動画：AIに作ってもらう</p><video controls preload="none" poster="videos/v1.jpg" src="videos/v1.mp4" style="width:100%;border-radius:8px;margin-top:8px"></video></div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
     </div>
-    <div class="card">
-      <h3>早く終わった人へ：ジオラマ風の地図にする</h3>
-      <pre class="prompt" id="p4">北海道弟子屈町の観光地図を、ジオラマ風の3Dイラストで作ってください。
+  </div>
+  <div class="stp-card" data-step="5">
+    <button class="stp-head" type="button"><span class="stp-num">5</span><span class="stp-title">GitHubに置く：箱を作って index.html を保存</span><span class="stp-min">11分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <div class="grid2">
+        <div>
+          <ol style="margin:0;padding-left:1.3em;line-height:1.9">
+            <li>「GitHubで新しく作る」を押す</li>
+            <li>名前は <b>teshikaga-map</b>、<b>Add README を On</b> → Create repository</li>
+            <li><b>Add file → Create new file</b></li>
+            <li>名前は <b>index.html</b>、AIのコードを貼り付け</li>
+            <li><b>Commit changes...</b> → もう一度 <b>Commit changes</b></li>
+          </ol>
+          <p style="margin-top:10px"><a class="btn" href="https://github.com/new" target="_blank">GitHubで新しく作る</a></p>
+        </div>
+        <div>
+          <p class="note" style="margin:0">▶ 作業動画：箱（リポジトリ）を作る</p><video controls preload="none" poster="videos/v2.jpg" src="videos/v2.mp4" style="width:100%;border-radius:8px;margin-top:8px"></video>
+          <p class="note" style="margin:10px 0 0">▶ 作業動画：index.html を置いて保存</p><video controls preload="none" poster="videos/v3.jpg" src="videos/v3.mp4" style="width:100%;border-radius:8px;margin-top:8px"></video>
+        </div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
+    </div>
+  </div>
+  <div class="stp-card" data-step="6">
+    <button class="stp-head" type="button"><span class="stp-num">6</span><span class="stp-title">Vercelで公開：自分のURLを開く</span><span class="stp-min">9分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <div class="grid2">
+        <div>
+          <ol style="margin:0;padding-left:1.3em;line-height:1.9">
+            <li>「Vercelを開く」を押す</li>
+            <li>teshikaga-map の <b>Import</b>（出ないときは左の選択で自分のGitHubの名前）</li>
+            <li>何も変えずに <b>Deploy</b></li>
+            <li>Continue to Project → Domains の下の <b>URL</b> を開く</li>
+            <li>自分のURLを<b>チャットに貼って見せ合う</b></li>
+          </ol>
+          <p style="margin-top:10px"><a class="btn" href="https://vercel.com/new" target="_blank">Vercelを開く</a></p>
+        </div>
+        <div><p class="note" style="margin:0">▶ 作業動画：Vercelで公開する</p><video controls preload="none" poster="videos/v4.jpg" src="videos/v4.mp4" style="width:100%;border-radius:8px;margin-top:8px"></video></div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
+    </div>
+  </div>
+  <div class="stp-card" data-step="7">
+    <button class="stp-head" type="button"><span class="stp-num">7</span><span class="stp-title">直す：AIに頼んで、もう1つ足す</span><span class="stp-min">9分</span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <div class="grid2">
+        <div>
+          <pre class="prompt" id="p3">いまのHTMLに、〇〇（例：冬の楽しみ方のコーナー）を追加してください。
+変更したあとの index.html の全文を返してください。</pre>
+          <button class="btn" data-copy="p3">プロンプトをコピー</button>
+          <ol style="margin:12px 0 0;padding-left:1.3em;line-height:1.9">
+            <li>新しいコードを全部コピー</li>
+            <li>GitHubで index.html を開き、<b>鉛筆マーク</b></li>
+            <li>⌘+A（Windowsは Ctrl+A）→ ⌘+V で全部置きかえ → <b>Commit</b></li>
+            <li>1分待って、自分のURLを<b>再読み込み</b></li>
+          </ol>
+        </div>
+        <div><p class="note" style="margin:0">▶ 作業動画：AIに頼んで直す</p><video controls preload="none" poster="videos/v5.jpg" src="videos/v5.mp4" style="width:100%;border-radius:8px;margin-top:8px"></video></div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
+    </div>
+  </div>
+  <div class="stp-card" data-step="8">
+    <button class="stp-head" type="button"><span class="stp-num">8</span><span class="stp-title">宿題：アプリを1つ作ってみる！</span><span class="stp-min"></span><span class="stp-state"></span></button>
+    <div class="stp-body">
+      <p><b>お題：だれの、どんな困りごとを助けるアプリを1つ作る</b><br>困りごと1つ・画面1つ。今日と同じ「index.html 1ファイル」でOK。困ったら、AIに聞く → 作業動画 → AI部で聞く。</p>
+      <p class="note">例：担任の席替えくじ／授業のタイマー／生徒の小テスト練習／ルーブリック採点の計算／提出物チェック表</p>
+      <div class="grid2">
+        <div>
+          <pre class="prompt" id="hw1">〇〇（だれ）の、〇〇（どんな困りごと）を助けるWebアプリを作りたいです。
+作る前に、私に質問を3つして、AIにアプリを作ってもらうためのプロンプトを一緒に作ってください。
+できたら、index.html の1ファイルだけで動くように、全文を1つのコードで返してください。</pre>
+          <button class="btn" data-copy="hw1">作り始めの頼み方をコピー</button>
+        </div>
+        <div>
+          <pre class="prompt" id="hw2">① URL：https://〇〇.vercel.app
+② だれの、どんな困りごとを助ける？：〇〇の、〇〇
+③ もし入力を貯められたら、何を貯めたい？：〇〇</pre>
+          <button class="btn ghost" data-copy="hw2">AI部への投稿の型をコピー</button>
+          <p class="note">例）② 3年担任の私の、席替えのたびにくじを作る手間 ／ ③ 席替えのたびの希望と結果。ほかの先生の投稿にも、ひとこと感想を。</p>
+        </div>
+      </div>
+      <div class="stp-foot"><button class="btn stp-done" type="button">できた！次へ ▶</button></div>
+    </div>
+  </div>
+  <details class="card" style="padding:14px 18px">
+    <summary style="cursor:pointer;font-weight:700">⭐ 早く終わった人へ：ジオラマ風の地図にする</summary>
+    <div class="grid2" style="margin-top:12px">
+      <div>
+        <pre class="prompt" id="p4">北海道弟子屈町の観光地図を、ジオラマ風の3Dイラストで作ってください。
 ・斜め上から見下ろした立体的な地形
 ・左に大きな屈斜路湖、真ん中に噴煙の上がる硫黄山、右に深い青の摩周湖、その間に温泉街
 ・湖や山の間をバスが走る道を1本
 ・文字や地名は入れない
 ・横長（16:9）</pre>
-      <button class="btn ghost" data-copy="p4">画像の頼み方をコピー</button>
-      <p class="note">できた画像を map.jpg という名前で保存し、GitHubの Add file → Upload files で入れます。そのあと AI に下の文を頼みます。</p>
-      <pre class="prompt" id="p5">地図を、同じフォルダにある map.jpg の画像に置きかえてください。
+        <button class="btn ghost" data-copy="p4">画像の頼み方をコピー</button>
+      </div>
+      <div>
+        <p class="note" style="margin-top:0">できた画像を map.jpg という名前で保存し、GitHubの Add file → Upload files で入れます。そのあと AI に下の文を頼みます。</p>
+        <pre class="prompt" id="p5">地図を、同じフォルダにある map.jpg の画像に置きかえてください。
 ピンは画像の上に置き、影をつけてふわふわ浮かぶようにしてください。
 変更したあとの index.html の全文を返してください。</pre>
-      <button class="btn ghost" data-copy="p5">HTMLの頼み方をコピー</button>
-    </div>
-  </div>
-  <div class="card" style="border:2px solid var(--teal)">
-    <h3>📝 宿題：アプリを1つ作ってみる！</h3>
-    <p><b>お題：だれの、どんな困りごとを助けるアプリを1つ作る</b><br>困りごと1つ・画面1つ。今日と同じ「index.html 1ファイル」でOK。困ったら、AIに聞く → <a href="videos.html">作業動画</a> → AI部で聞く。</p>
-    <p class="note">例：担任の席替えくじ／授業のタイマー／生徒の小テスト練習／ルーブリック採点の計算／提出物チェック表</p>
-    <div class="grid2">
-      <div>
-        <pre class="prompt" id="hw1">〇〇（だれ）の、〇〇（どんな困りごと）を助けるWebアプリを作りたいです。
-作る前に、私に質問を3つして、AIにアプリを作ってもらうためのプロンプトを一緒に作ってください。
-できたら、index.html の1ファイルだけで動くように、全文を1つのコードで返してください。</pre>
-        <button class="btn" data-copy="hw1">作り始めの頼み方をコピー</button>
-      </div>
-      <div>
-        <pre class="prompt" id="hw2">① URL：https://〇〇.vercel.app
-② だれの、どんな困りごとを助ける？：〇〇の、〇〇
-③ もし入力を貯められたら、何を貯めたい？：〇〇</pre>
-        <button class="btn ghost" data-copy="hw2">AI部への投稿の型をコピー</button>
-        <p class="note">例）② 3年担任の私の、席替えのたびにくじを作る手間 ／ ③ 席替えのたびの希望と結果<br>ほかの先生の投稿にも、ひとこと感想を。③で考えた「貯めたいもの」は、中級で実際に貯めます。</p>
+        <button class="btn ghost" data-copy="p5">HTMLの頼み方をコピー</button>
       </div>
     </div>
-  </div>
+  </details>
+<script>
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('#make .stp-card'));
+  var KEY='vc-shokyu-done', done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+  function paint(){
+    var n=0;cards.forEach(function(c){var d=!!done[c.dataset.step];c.classList.toggle('done',d);c.querySelector('.stp-state').textContent=d?'✓ できた':'';if(d)n++;});
+    document.getElementById('stpCount').textContent=n+' / '+cards.length;
+    document.querySelector('.stp-bar i').style.width=(n/cards.length*100)+'%';
+  }
+  function open(c,scroll){cards.forEach(function(x){x.classList.toggle('open',x===c)});if(scroll)c.scrollIntoView({behavior:'smooth',block:'start'});}
+  cards.forEach(function(c,i){
+    c.querySelector('.stp-head').onclick=function(){if(c.classList.contains('open')){c.classList.remove('open')}else{open(c,false)}};
+    c.querySelector('.stp-done').onclick=function(){done[c.dataset.step]=1;save();paint();if(cards[i+1])open(cards[i+1],true);};
+  });
+  document.getElementById('stpReset').onclick=function(){done={};save();paint();open(cards[0],true);};
+  paint();
+  var first=cards.filter(function(c){return !done[c.dataset.step]})[0]||cards[cards.length-1];open(first,false);
+})();
+</script>
 </section>
 
 <!-- ② 貯める -->

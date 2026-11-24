@@ -45,6 +45,13 @@
 .stp-card.done .stp-title{color:var(--mute)}
 .stp-body{display:none;padding:4px 18px 18px}.stp-card.open .stp-body{display:block}
 .stp-foot{margin-top:16px;text-align:right}
+.pop-wrap{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:50}
+.pop-p{position:absolute;width:10px;height:14px;border-radius:2px;will-change:transform,opacity;animation:popfly 1s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes popfly{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop-txt{position:absolute;transform:translate(-50%,-50%);font-weight:900;font-size:30px;color:var(--brand);text-shadow:0 2px 0 #fff,0 0 12px #fff;white-space:nowrap;animation:poptxt 1s ease-out forwards}
+@keyframes poptxt{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}25%{transform:translate(-50%,-90%) scale(1.25);opacity:1}100%{transform:translate(-50%,-160%) scale(1);opacity:0}}
+.stp-card.justdone .stp-num{animation:numpop .5s ease}
+@keyframes numpop{0%{transform:scale(1)}40%{transform:scale(1.6)}100%{transform:scale(1)}}
 </style>
   <div class="card three">
     <h3>バイブコーディングで大事な3つ</h3>
@@ -237,10 +244,24 @@ CSSとJavaScriptも同じファイルに入れて、全文を1つのコードで
     document.getElementById('stpCount').textContent=n+' / '+cards.length;
     document.querySelector('.stp-bar i').style.width=(n/cards.length*100)+'%';
   }
+  function pop(btn,big){
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var r=btn.getBoundingClientRect(),w=document.createElement('div');w.className='pop-wrap';
+    w.style.left=(r.left+r.width/2)+'px';w.style.top=(r.top+r.height/2)+'px';
+    var cols=['#05a8dd','#f59e0b','#ef4444','#10b981','#8b5cf6','#ec4899','#facc15'],n=big?90:40;
+    for(var i=0;i<n;i++){var e=document.createElement('i');e.className='pop-p';var a=Math.random()*Math.PI*2,d=(big?160:90)+Math.random()*(big?260:140);
+      e.style.background=cols[i%cols.length];e.style.setProperty('--dx',Math.cos(a)*d+'px');e.style.setProperty('--dy',(Math.sin(a)*d-60)+'px');e.style.setProperty('--r',(Math.random()*720-360)+'deg');
+      e.style.animationDuration=(0.8+Math.random()*0.6)+'s';w.appendChild(e);}
+    var t=document.createElement('div');t.className='pop-txt';t.textContent=big?'🎉 ぜんぶクリア！':'ぱーん！ できた！';t.style.left=(window.innerWidth/2-(r.left+r.width/2))+'px';w.appendChild(t);
+    document.body.appendChild(w);setTimeout(function(){w.remove()},1600);
+  }
   function open(c,scroll){cards.forEach(function(x){x.classList.toggle('open',x===c)});if(scroll)c.scrollIntoView({behavior:'smooth',block:'start'});}
   cards.forEach(function(c,i){
     c.querySelector('.stp-head').onclick=function(){if(c.classList.contains('open')){c.classList.remove('open')}else{open(c,false)}};
-    c.querySelector('.stp-done').onclick=function(){done[c.dataset.step]=1;save();paint();if(cards[i+1])open(cards[i+1],true);};
+    c.querySelector('.stp-done').onclick=function(){var b=this;done[c.dataset.step]=1;save();paint();
+      var all=cards.every(function(x){return done[x.dataset.step]});pop(b,all);
+      c.classList.add('justdone');setTimeout(function(){c.classList.remove('justdone')},600);
+      if(cards[i+1])setTimeout(function(){open(cards[i+1],true)},550);};
   });
   document.getElementById('stpReset').onclick=function(){done={};save();paint();open(cards[0],true);};
   paint();

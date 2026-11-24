@@ -13,7 +13,7 @@
 <body>
 <header>
   <h1>バイブコーディング研修 練習サイト</h1>
-  <span class="sub">作って、貯めて、分析する｜青楓館のPBL口コミで体験（練習用ダミー）</span>
+  <span class="sub">作って、貯めて、分析する｜① 弟子屈観光MAP ／ ②③ 口コミデータ（練習用ダミー）</span>
   <i class="pg hd pg-c1" aria-hidden="true"></i>
 </header>
 <nav id="tabs">
@@ -30,8 +30,8 @@
 <!-- ① つくる -->
 <section id="make" class="on">
   <i class="pg tr pg-c6" aria-hidden="true"></i>
-  <h2>① つくる：青楓館のPBL紹介LP</h2>
-  <p class="lead"><span class="tag way">つながり方：チャット</span> ふだん使っているAI（ChatGPT・Gemini・Claudeなど、無料でOK）に頼んで作ります。</p>
+  <h2>① つくる：弟子屈観光MAP</h2>
+  <p class="lead"><span class="tag way">つながり方：チャット</span> ふだん使っているAI（ChatGPT・Gemini・Claudeなど、無料でOK）に頼んで、自分だけの「弟子屈町の観光MAP」を作り、自分のURLで公開します。</p>
   <div class="card three">
     <h3>バイブコーディングで大事な3つ</h3>
     <div class="grid3">
@@ -42,28 +42,65 @@
   </div>
   <div class="grid2">
     <div class="card">
-      <h3>頼み方の型（コピーして、AIに貼り付け）</h3>
-      <pre class="prompt" id="p1">青楓館高等学院のPBL（課題解決型学習）を紹介するLPを、1つのHTMLファイルで作ってください。
-目的：中学生と保護者に、青楓館のPBLの魅力を伝える
-使う人：スマホで学校を調べている中学生と保護者
-載せたいプロジェクト：輪島・沖縄・文房具・芦屋校舎・大津町
-入れたい機能：
-・プロジェクトごとのカード
-・PBLに参加した生徒の口コミ欄（ニックネーム・プロジェクト・学年・★1〜5・本文）
-雰囲気：青楓館ブルー（#05a8dd）を基調に明るく。スマホで見やすく</pre>
-      <button class="btn" data-copy="p1">プロンプトをコピー</button>
-      <p class="note">型：目的 → 使う人 → 機能 → 見た目。うまくいかないときは、どこが違うかを1つずつ伝えます。</p>
+      <h3>きょうのゴール（お手本）</h3>
+      <a href="https://teshikaga-map.vercel.app/" target="_blank"><img src="img/teshikaga-sample.jpg" alt="弟子屈観光MAPのお手本" style="width:100%;border-radius:8px;border:1px solid var(--line)"></a>
+      <p class="note">だれに・なにを・どんな形で見せるかは自由です。お手本と同じでなくてOK。</p>
+      <a class="btn" href="https://teshikaga-map.vercel.app/" target="_blank">お手本のMAPを開く</a>
+      <a class="btn ghost" href="videos.html">▶ 作業動画を見る</a>
     </div>
     <div class="card">
-      <h3>見本のLP</h3>
-      <p>口コミ欄は、このサイトの共有データベースにつながっています。</p>
-      <a class="btn" href="lp.html" target="_blank">見本のLPを開く</a>
-      <h3 style="margin-top:18px">早く終わった人へ</h3>
-      <pre class="prompt" id="p2">次の点を直してください。
-・一番上に「PBLって何？」を中学生向けに3行で説明する欄を追加して
-・口コミを★の多い順に並べ替えるボタンを付けて
-・ページの一番下に「研修用の見本です」と表示して</pre>
-      <button class="btn ghost" data-copy="p2">追加の頼み方をコピー</button>
+      <h3>流れ（5ステップ）</h3>
+      <ol style="margin:0;padding-left:1.3em;line-height:1.9;font-size:14px">
+        <li><b>考える</b>：AIに質問してもらい、プロンプトを一緒に作る</li>
+        <li><b>AIで作る</b>：index.html を1ファイルで書いてもらう</li>
+        <li><b>GitHub</b>：New repository（teshikaga-map、Add README を On）→ Add file → Create new file → 名前は index.html、貼り付け → Commit changes</li>
+        <li><b>Vercel</b>：Import → 何も変えずに Deploy → 自分のURLを開く</li>
+        <li><b>直す</b>：AIに頼む → 全文コピー → 鉛筆マーク → 全部置きかえ → Commit</li>
+      </ol>
+      <p style="margin-top:10px"><a class="btn" href="https://github.com/new" target="_blank">GitHubで新しく作る</a> <a class="btn ghost" href="https://vercel.com/new" target="_blank">Vercelを開く</a></p>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>0. 考える（コピーして、〇〇を書きかえて貼る）</h3>
+      <pre class="prompt" id="p1">弟子屈町（北海道）の観光MAPのWebページを作りたいです。
+だれに：〇〇
+なにを：〇〇
+形：〇〇
+作る前に、私に質問を3つして、AIにWebページを作ってもらうためのプロンプトを一緒に作ってください。</pre>
+      <button class="btn" data-copy="p1">プロンプトをコピー</button>
+      <p class="note">例）だれに：修学旅行で来る高校生／なにを：1日モデルコース／形：地図のピンを押すと説明が出る</p>
+    </div>
+    <div class="card">
+      <h3>1. AIで作る</h3>
+      <pre class="prompt" id="p2">上のプロンプトで、index.html の1ファイルだけで動くWebページを作ってください。
+CSSとJavaScriptも同じファイルに入れて、全文を1つのコードで返してください。</pre>
+      <button class="btn" data-copy="p2">プロンプトをコピー</button>
+      <p class="note">返ってきたコードは、右上のコピーボタンで全部コピーします。</p>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>2. 直す</h3>
+      <pre class="prompt" id="p3">いまのHTMLに、〇〇（例：冬の楽しみ方のコーナー）を追加してください。
+変更したあとの index.html の全文を返してください。</pre>
+      <button class="btn" data-copy="p3">プロンプトをコピー</button>
+      <p class="note">うまくいかないときは、どこが違うかを1つずつ伝えます。</p>
+    </div>
+    <div class="card">
+      <h3>早く終わった人へ：ジオラマ風の地図にする</h3>
+      <pre class="prompt" id="p4">北海道弟子屈町の観光地図を、ジオラマ風の3Dイラストで作ってください。
+・斜め上から見下ろした立体的な地形
+・左に大きな屈斜路湖、真ん中に噴煙の上がる硫黄山、右に深い青の摩周湖、その間に温泉街
+・湖や山の間をバスが走る道を1本
+・文字や地名は入れない
+・横長（16:9）</pre>
+      <button class="btn ghost" data-copy="p4">画像の頼み方をコピー</button>
+      <p class="note">できた画像を map.jpg という名前で保存し、GitHubの Add file → Upload files で入れます。そのあと AI に下の文を頼みます。</p>
+      <pre class="prompt" id="p5">地図を、同じフォルダにある map.jpg の画像に置きかえてください。
+ピンは画像の上に置き、影をつけてふわふわ浮かぶようにしてください。
+変更したあとの index.html の全文を返してください。</pre>
+      <button class="btn ghost" data-copy="p5">HTMLの頼み方をコピー</button>
     </div>
   </div>
 </section>

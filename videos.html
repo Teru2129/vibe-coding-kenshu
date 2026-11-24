@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作業動画｜バイブコーディング研修 練習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="brand.css">
+<style>
+.vwrap{max-width:1040px;margin:0 auto;padding:20px 16px 60px}
+.vwrap h2{font-size:22px;margin:28px 0 6px}
+.vwrap .lead{color:var(--mute);font-size:15px;margin:0 0 14px}
+.vgrid{display:grid;gap:18px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.vcard h3{font-size:17px;margin:0 0 4px}
+.vcard p{font-size:14px;color:var(--mute);margin:0 0 10px}
+.vcard video{width:100%;border-radius:10px;background:#111;display:block}
+.vtag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--brand);border-radius:6px;padding:2px 8px;margin-right:6px}
+.vsoon{border-style:dashed;color:var(--mute);font-size:14px}
+.back{display:inline-block;margin-top:8px;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>作業動画</h1>
+  <span class="sub">研修の操作を、画面の動画で見られます（音声なし・字幕つき）</span>
+</header>
+<nav id="tabs">
+  <a href="index.html" style="padding:12px 14px;font-size:14px;color:var(--mute);text-decoration:none">← 練習サイトにもどる</a>
+</nav>
+<main class="vwrap">
+  <h2><span class="vtag">初級</span>自分だけの「弟子屈 観光MAP」を作って公開する</h2>
+  <p class="lead">AIでHTMLを作る → GitHubに置く → Vercelで公開する。止まったところの動画だけ見ればOKです。</p>
+  <div class="vgrid">
+    <div class="vcard"><h3>① AIでHTMLを作る（Gemini）</h3><p>先に質問してもらってプロンプトを作り、index.html の1ファイルで書いてもらう。</p>
+      <video controls preload="none" poster="videos/v1.jpg" src="videos/v1.mp4"></video></div>
+    <div class="vcard"><h3>② GitHubにリポジトリを作る</h3><p>右上の＋ → New repository → teshikaga-map、Add README を On → Create repository。</p>
+      <video controls preload="none" poster="videos/v2.jpg" src="videos/v2.mp4"></video></div>
+    <div class="vcard"><h3>③ index.html を置いて保存（Commit）</h3><p>Add file → Create new file → 名前は index.html、AIのHTMLを貼る → Commit changes。</p>
+      <video controls preload="none" poster="videos/v3.jpg" src="videos/v3.mp4"></video></div>
+    <div class="vcard"><h3>④ Vercelで公開する</h3><p>vercel.com/new → teshikaga-map を Import → 何も変えずに Deploy。</p>
+      <video controls preload="none" poster="videos/v4.jpg" src="videos/v4.mp4"></video></div>
+    <div class="vcard vsoon">⑤ 公開されたURLを開く・AIに頼んで直す（準備中）</div>
+  </div>
+  <h2><span class="vtag">中級</span>自分のデータベースを作る（Supabase）</h2>
+  <div class="vgrid"><div class="vcard vsoon">準備中</div></div>
+  <h2><span class="vtag">上級</span>サイトとつないで、AIで分析する</h2>
+  <div class="vgrid"><div class="vcard vsoon">準備中</div></div>
+  <a class="back" href="index.html">← 練習サイトにもどる</a>
+</main>
+</body>
+</html>
